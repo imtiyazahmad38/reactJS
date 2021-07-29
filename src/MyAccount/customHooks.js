@@ -7,7 +7,9 @@ const useForm = (initialValues,validate) => {
 	const [errors,setErrors] = useState({});
     const [loading,setLoading]=useState(false);
     const [response,setResponse]=useState([])
+	const { userId, firstName, lastName, email, password, profileImage, phoneNumber } = useState();
 	let history = useHistory();
+	
 	const HandleSubmit = (event) => {
 		
 		event.preventDefault();
@@ -29,6 +31,13 @@ const useForm = (initialValues,validate) => {
                 setResponse(result.response)
                 console.log(response)
                 setLoading(false)
+				localStorage.setItem('userId', result.response.userInfo.userId);
+				localStorage.setItem('firstName', result.response.userInfo.firstName);
+				localStorage.setItem('lastName', result.response.userInfo.lastName);
+				localStorage.setItem('email', result.response.userInfo.email);
+				localStorage.setItem('password', result.response.userInfo.password);
+				localStorage.setItem('profileImage', result.response.userInfo.profileImage);
+				localStorage.setItem('phoneNumber', result.response.userInfo.phoneNumber);
 				history.push("/Myaccount")
             }).catch(ex=>{
                 setLoading(false)

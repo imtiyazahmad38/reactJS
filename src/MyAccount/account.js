@@ -1,109 +1,61 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
+import React,{useState,useEffect} from 'react';
+import {useHistory} from 'react-router-dom';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import { createStyles, makeStyles } from '@material-ui/core/styles';
 
-interface Column {
-  id: 'name' | 'image';
-  label: string;
-  minWidth?: number;
-  align?: 'right';
-  format?: (value: number) => string;
+
+const Myaccount=()=>{
+    let history = useHistory();
+    useEffect(() => {
+        const userId = localStorage.getItem('userId');
+        if(!userId) {
+          history.push('/login');
+        }
+      }
+    )
+    const logout=() =>{
+        localStorage.clear();
+        history.push("/")
+    }
+    const firstName = localStorage.getItem('firstName');
+    const lastName = localStorage.getItem('lastName');
+
+    const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        root: {
+        flexGrow: 1,
+        },
+        menuButton: {
+        marginRight: theme.spacing(2),
+        },
+        title: {
+        flexGrow: 1,
+        },
+    }),
+    );  
+    const classes = useStyles();  
+    return(
+        <React.Fragment>
+        <div className={classes.root}>
+        <AppBar position="static">
+        <Toolbar>
+        <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+            <MenuIcon />
+        </IconButton>
+        <Typography variant="h6" className={classes.title}>
+        Welcome {firstName} {lastName}
+        </Typography>
+        <Button color="inherit" onClick={e=>logout()}>Logout</Button>
+        </Toolbar>
+        </AppBar>
+        </div>
+        </React.Fragment>
+    )
 }
 
-const columns: Column[] = [
-  { id: 'name', label: 'Category Name', minWidth: 170 },
-  { id: 'image', label: 'Category Image', minWidth: 100 },
-];
-
-interface Data {
-  name: string;
-  image: string;
-}
-
-function createData(name: string, image: string): Data {
-  return { name, image };
-}
-
-const rows = [
-  createData('India', 'IN'),
-  createData('China', 'CN'),
-  createData('Italy', 'IT'),
-];
-
-const useStyles = makeStyles({
-  root: {
-    width: '100%',
-  },
-  container: {
-    maxHeight: 440,
-  },
-});
-
-export default function Myaccount() {
-  const classes = useStyles();
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(+event.target.value);
-    setPage(0);
-  };
-
-  return (
-    <Paper className={classes.root}>
-      <TableContainer className={classes.container}>
-        <Table stickyHeader aria-label="sticky table">
-          <TableHead>
-            <TableRow>
-              {columns.map((column) => (
-                <TableCell
-                  key={column.id}
-                  align={column.align}
-                  style={{ minWidth: column.minWidth }}
-                >
-                  {column.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
-              return (
-                <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
-                  {columns.map((column) => {
-                    const value = row[column.id];
-                    return (
-                      <TableCell key={column.id} align={column.align}>
-                        {column.format && typeof value === 'number' ? column.format(value) : value}
-                      </TableCell>
-                    );
-                  })}
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[10, 25, 100]}
-        component="div"
-        count={rows.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-    </Paper>
-  );
-}
+export default Myaccount;
