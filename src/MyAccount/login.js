@@ -29,7 +29,7 @@ const Login = () => {
     <div className={classes.root}>
         <Container maxWidth="sm">
         
-        <form onSubmit={HandleSubmit}>
+        
       <Grid container spacing={3}>
 		
     <Grid item xs={6}>
@@ -45,12 +45,12 @@ const Login = () => {
 
         </Grid>
         <Grid item xs={12} className="loginGrid">
-        <Button type="submit" variant="contained" color="primary">
+        <Button  variant="contained" color="primary" onClick={HandleSubmit}>
         Login
       </Button>
         </Grid>
         </Grid>
-	    </form>
+	   
       
       </Container>
     </div>

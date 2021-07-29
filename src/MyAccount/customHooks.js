@@ -7,9 +7,9 @@ const useForm = (initialValues,validate) => {
 	const [errors,setErrors] = useState({});
     const [loading,setLoading]=useState(false);
     const [response,setResponse]=useState([])
-
+	let history = useHistory();
 	const HandleSubmit = (event) => {
-		let history = useHistory();
+		
 		event.preventDefault();
 		const validationErrors = validate(inputs);
 		const noErrors = Object.keys(validationErrors).length === 0;
