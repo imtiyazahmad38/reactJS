@@ -1,24 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Home from './home/home';
+import Login from './MyAccount/login';
+import createBrowserHistory from 'history/createBrowserHistory';
+import Myaccount from './MyAccount/account';
+
+const history = createBrowserHistory();
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <div >
+            <Router history={history}>
+                <div>
+
+                    {/* <HeaderNavContainer /> */}
+
+                    <Switch>
+                        <Route exact path="/" component={Home} />
+                        <Route exact path="/login" component={Login} />
+                        <Route exact path="/myaccount" component={Myaccount} />
+                        {/* <Route path="/courses" component={CourseListContainer} />
+                        <Route exact path="/course" component={AddOrEditCourseContainer} />
+                        <Route path="/course/:id" component={AddOrEditCourseContainer} />
+                        <Route path="/about" component={About} />
+                        <Route component={PageNotFound} /> */}
+                    </Switch>
+
+                </div>
+
+            </Router>
+        </div>
   );
 }
 
