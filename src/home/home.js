@@ -20,6 +20,9 @@ const Home=() =>{
     const clicMe=() =>{
         history.push("/login")
     }
+    const registration=() =>{
+        history.push("/registration")
+    }
     const [response,setResponse]=useState([])
     let request = {"request":{"type":"getCategoryList","devicetype":"I"},"requestinfo":{"pageNo":"1"}}
     useEffect(()=>{
@@ -66,6 +69,7 @@ const Home=() =>{
             I am superman
             </Typography>
             <Button color="inherit" onClick={e=>clicMe()}>Login</Button>
+            <Button color="inherit" onClick={e=>registration()}>Registration</Button>
             </Toolbar>
             </AppBar>
             </div>

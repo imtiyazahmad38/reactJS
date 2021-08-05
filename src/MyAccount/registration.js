@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from 'react';
-import {useForm} from './customHooks';
-import {validate} from './validate';
+import {useRegForm} from './customHooks';
+import {regvalidate} from './validate';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Login = () => {
+const Registration = () => {
   let history = useHistory();
     useEffect(() => {
         const userId = localStorage.getItem('userId');
@@ -41,7 +41,7 @@ const Login = () => {
       history.push("/")
     }
   const classes = useStyles();
-	const {inputs, handleInputChange, HandleSubmit ,errors} = useForm({phoneNumber:'',password:''},validate);
+	const {inputs, handleInputChange, HandleSubmit ,errors} = useRegForm({firstName:'',lastName:'',email:'',phoneNumber:'',password:'',cpassword:''},regvalidate);
 	return (
     <div className={classes.root}>
             <AppBar position="static">
@@ -50,7 +50,7 @@ const Login = () => {
             <MenuIcon />
         </IconButton>
         <Typography variant="h6" className={classes.title}>
-        Please Login Here
+        Please register Yourself Here
         </Typography>
         <Button color="inherit" onClick={e=>Home()}>Home</Button>
         </Toolbar>
@@ -59,18 +59,23 @@ const Login = () => {
         
         
       <Grid container spacing={3}>
-		
-    <Grid item xs={6}>
-
-	       
-          <TextField id="outlined-basic" type="text" name="phoneNumber" required error={errors.phoneNumber} helperText={errors.phoneNumber?"Please Enter Valid PhoneNumber":""} label="Phone Number" value={inputs.phoneNumber} variant="outlined" onChange={handleInputChange} />
-
+        <Grid item xs={6}>
+          <TextField type="text" name="firstName" required error={errors.firstName} helperText={errors.firstName?errors.firstName:""} label="First Name" value={inputs.firstName}variant="outlined" onChange={handleInputChange} />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField type="text" name="lastName" required error={errors.lastName} helperText={errors.lastName?errors.lastName:""} label="Last Name" value={inputs.lastName}variant="outlined" onChange={handleInputChange} />
+        </Grid>
+        <Grid item xs={6}>
+          <TextField type="email" name="email" required error={errors.email} helperText={errors.email?errors.email:""} label="Email" value={inputs.email}variant="outlined" onChange={handleInputChange} />
+        </Grid>
+        <Grid item xs={6}>	       
+          <TextField id="outlined-basic" type="text" name="phoneNumber" required error={errors.phoneNumber} helperText={errors.phoneNumber?errors.phoneNumber:""} label="Phone Number" value={inputs.phoneNumber} variant="outlined" onChange={handleInputChange} />
         </Grid>
 	      <Grid item xs={6}>
-
-	        
-          <TextField error={errors.password} required name="password" type="password" helperText={errors.password?"Please Enter Valid Password":""} value={inputs.password} label="Password" variant="outlined" onChange={handleInputChange} />
-
+        <TextField error={errors.password} required name="password" type="password" helperText={errors.password?errors.password:""} value={inputs.password} label="Password" variant="outlined" onChange={handleInputChange} />
+        </Grid>
+        <Grid item xs={6}>
+        <TextField error={errors.cpassword} required name="cpassword" type="password" helperText={errors.cpassword?errors.cpassword:""} value={inputs.cpassword} label="Confirm Password" variant="outlined" onChange={handleInputChange} />
         </Grid>
         <Grid item xs={12} className="loginGrid">
         <Button  variant="contained" color="primary" onClick={HandleSubmit}>
@@ -85,4 +90,4 @@ const Login = () => {
 	)
 }
 
-export default Login;
+export default Registration;

@@ -4,6 +4,7 @@ import Home from './home/home';
 import Login from './MyAccount/login';
 import createBrowserHistory from 'history/createBrowserHistory';
 import Myaccount from './MyAccount/account';
+import Registration from './MyAccount/registration';
 
 const history = createBrowserHistory();
 
@@ -20,8 +21,8 @@ function App() {
                         <Route exact path="/" component={Home} />
                         <Route exact path="/login" component={Login} />
                         <Route exact path="/myaccount" component={Myaccount} />
-                        {/* <Route path="/courses" component={CourseListContainer} />
-                        <Route exact path="/course" component={AddOrEditCourseContainer} />
+                        <Route path="/registration" component={Registration} />
+                        {/*<Route exact path="/course" component={AddOrEditCourseContainer} />
                         <Route path="/course/:id" component={AddOrEditCourseContainer} />
                         <Route path="/about" component={About} />
                         <Route component={PageNotFound} /> */}
