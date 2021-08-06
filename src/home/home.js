@@ -1,5 +1,4 @@
 import React,{useState,useEffect} from 'react';
-import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { createStyles, makeStyles } from '@material-ui/core/styles';
 import {useHistory} from 'react-router-dom';
@@ -78,7 +77,7 @@ const Home=() =>{
                 <td>Cat name</td>
                 <td>Cat Image</td>
             </tr>
-            {loading!=true?response.length>0?response.map(obj=>(
+            {loading!==true?response.length>0?response.map(obj=>(
 
                 
                     <tr key={obj.categoryId}>

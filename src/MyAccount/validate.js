@@ -32,10 +32,10 @@ const regvalidate = (inputs) =>{
        errors.phoneNumber = 'Check phoneNumber';
    } 
 
-   var pattern = new RegExp(/^[0-9\b]+$/);
-   if (!pattern.test(inputs.phoneNumber)) { 
+   var patternphone = new RegExp(/^[0-9\b]+$/);
+   if (!patternphone.test(inputs.phoneNumber)) { 
     errors.phoneNumber = 'Please enter only number.'; 
-   }else if(inputs.phoneNumber.length != 10){
+   }else if(inputs.phoneNumber.length !== 10){
     errors.phoneNumber = 'Please enter valid phone number.';  
    }
 
@@ -45,7 +45,7 @@ const regvalidate = (inputs) =>{
        errors.password = 'Check Password'
    }
     //match password
-    if(inputs.password != inputs.cpassword){
+    if(inputs.password !== inputs.cpassword){
         errors.cpassword = 'password does not match'
     }
 
