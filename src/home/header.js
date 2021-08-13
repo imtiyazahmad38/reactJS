@@ -11,9 +11,11 @@ import { Link } from "react-router-dom";
 
 const Header = (props) => {
   let history = useHistory();
-  const userId = localStorage.getItem("userId");
-  const firstName = localStorage.getItem("firstName");
-  const lastName = localStorage.getItem("lastName");
+
+  const [userId,setuserId] =React.useState(localStorage.getItem("userId") || "");
+  const [lastName,setlastName] =React.useState(localStorage.getItem("lastName")  || "");
+  const [firstName,setfirstName] =React.useState(localStorage.getItem("firstName") || "");
+
   const clicMe = () => {
     history.push("/login");
   };
@@ -24,6 +26,16 @@ const Header = (props) => {
     localStorage.clear();
     history.push("/");
   };
+
+
+  React.useEffect(() => {
+     return history.listen((location) => { 
+      setuserId(localStorage.getItem("userId"))
+      setlastName(localStorage.getItem("lastName"))
+      setfirstName(localStorage.getItem("firstName"))
+        console.log(`You changed the page to: ${location.pathname}`) 
+     }) 
+  },[history]) 
 
   const useStyles = makeStyles((theme: Theme) =>
     createStyles({

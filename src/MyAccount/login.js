@@ -26,7 +26,7 @@ const Login = () => {
     if (userId) {
       history.push("/Myaccount");
     }
-  });
+  },[]);
   const classes = useStyles();
   const { inputs, handleInputChange, HandleSubmit, errors } = useForm(
     { phoneNumber: "", password: "" },
